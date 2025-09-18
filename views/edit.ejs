@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Edit Todo</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="box">
+        <h1>Edit Task</h1>
+    </div>
+    <div class="box">
+        <form action="/update/<%= id %>" method="post" id="editForm" onsubmit="return validateEditForm()">
+            <input type="text" name="updatedItem" id="editInput" value="<%= item.text %>" autofocus>
+            <div class="priority-select">
+                <label for="priority">Priority:</label>
+                <select name="priority" id="priority">
+                    <option value="high" <%= item.priority === "high" ? "selected" : "" %>>High</option>
+                    <option value="medium" <%= item.priority === "medium" ? "selected" : "" %>>Medium</option>
+                    <option value="low" <%= item.priority === "low" ? "selected" : "" %>>Low</option>
+                </select>
+            </div>
+            <div id="editAlert" class="alert">Task cannot be empty!</div>
+            <button type="submit" class="update-button">Update</button>
+        </form>
+        
+        <script>
+            function validateEditForm() {
+                const editInput = document.getElementById("editInput");
+                const editAlert = document.getElementById("editAlert");
+                
+                if (editInput.value.trim() === "") {
+                    editAlert.style.display = "block";
+                    
+                    setTimeout(function() {
+                        editAlert.style.display = "none";
+                    }, 3000);
+                    
+                    return false;
+                }
+                return true;
+            }
+        </script>
+    </div>
+</body>
+</html>

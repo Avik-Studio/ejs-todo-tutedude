@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Todo list</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="box">
+        <h1>Todo List</h1>
+        <div class="filter-container">
+            <form action="/" method="GET" class="filter-form">
+                <label for="priority-filter">Filter by Priority:</label>
+                <select id="priority-filter" name="priority" onchange="this.form.submit()">
+                    <option value="all" <%= currentPriority === "all" ? "selected" : "" %>>All Tasks</option>
+                    <option value="high" <%= currentPriority === "high" ? "selected" : "" %>>High Priority</option>
+                    <option value="medium" <%= currentPriority === "medium" ? "selected" : "" %>>Medium Priority</option>
+                    <option value="low" <%= currentPriority === "low" ? "selected" : "" %>>Low Priority</option>
+                </select>
+            </form>
+        </div>
+    </div>
+    <div class="box">
+        <div class="items">
+            <% for(var j=0; j<items.length; j++) { %>
+                <% var i = indices[j]; %>
+                <div class="task-item <%= items[j].priority %>-priority">
+                    <input type="checkbox">
+                    <div class="task-content">
+                        <p><%= items[j].text %></p>
+                        <span class="priority-badge <%= items[j].priority %>"><%= items[j].priority %></span>
+                    </div>
+                    <div class="task-controls">
+                        <form action="/edit/<%= i %>" method="GET" style="margin: 0;" class="edit-form">
+                            <button type="submit" class="edit-btn">Edit</button>
+                        </form>
+                        <form action="/delete/<%= i %>" method="POST" style="margin: 0;" class="delete-form">
+                            <button type="submit" class="delete-btn">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+        
+        <form action="/" method="post" class="add-task-form" id="taskForm" onsubmit="return validateForm()">
+            <div class="input-container">
+                <input type="text" name="ele1" id="taskInput" placeholder="Enter your task">
+                <select name="priority">
+                    <option value="high">High</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+            <button type="submit" value="Add" class="add-btn">+</button>
+        </form>
+        
+        <div id="alert" class="alert">Please enter a task!</div>
+        
+        <script>
+            function validateForm() {
+                const taskInput = document.getElementById("taskInput");
+                const alert = document.getElementById("alert");
+                
+                if (taskInput.value.trim() === "") {
+                   
+                    alert.style.display = "block";
+                    
+                    
+                    setTimeout(function() {
+                        alert.style.display = "none";
+                    }, 3000);
+                    
+                    return false;
+                }
+                return true; 
+            }
+        </script>
+    </div>
+
+</body>
+</html>

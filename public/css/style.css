@@ -1,0 +1,320 @@
+html {
+    background-color: #f0f2ff;
+    background-image: -webkit-linear-gradient(65deg, #A683E3 50%, #E4E9FD 50%);
+    min-height: 1000px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1{
+    color: #333;
+    padding: 20px 0 10px 0;
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
+}
+
+.box{
+    max-width: 450px;
+    margin: 50px auto;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 10px 20px;
+    position: relative;
+}
+#heading {
+    background-color: #A683E3;
+    text-align: center;
+}
+.items{
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border-left: 4px solid transparent;
+}
+
+.task-controls {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+}
+
+.edit-form, .delete-form {
+    margin: 0;
+}
+
+.delete-btn {
+    min-height: 30px;
+    width: auto;
+    border-radius: 20px;
+    padding: 6px 15px;
+    font-size: 14px;
+    background-color: #ff6b6b;
+    color: white;
+    font-weight: 500;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+    background-color: #ff5252;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+.filter-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.filter-form {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-form label {
+    font-size: 14px;
+    color: #777;
+}
+
+.filter-form select {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    outline: none;
+}
+
+.filter-form select:focus {
+    border-color: #A683E3;
+    box-shadow: 0 0 0 2px rgba(166, 131, 227, 0.2);
+}
+
+.priority-badge {
+    font-size: 12px;
+    padding: 3px 12px;
+    border-radius: 15px;
+    margin-left: 10px;
+    color: white;
+    font-weight: 500;
+    text-transform: lowercase;
+}
+
+.high {
+    background-color: #FF6B6B;
+}
+
+.medium {
+    background-color: #A683E3;
+    color: white;
+}
+
+.low {
+    background-color: #6BCB77;
+}
+
+.high-priority {
+    border-left: 4px solid #FF6B6B;
+}
+
+.medium-priority {
+    border-left: 4px solid #FFD93D;
+}
+
+.low-priority {
+    border-left: 4px solid #6BCB77;
+}
+
+.input-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 40px;
+    padding: 15px 0;
+}
+
+.input-container select {
+    padding: 0 12px;
+    height: 45px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    background: #fff;
+    font-size: 14px;
+    min-width: 120px;
+    cursor: pointer;
+    outline: none;
+}
+
+.input-container select:focus {
+    border-color: #A683E3;
+    box-shadow: 0 0 0 2px rgba(166, 131, 227, 0.2);
+}
+
+.task-content {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    margin-right: 10px;
+    overflow: hidden;
+}
+
+.priority-select {
+    margin: 15px 0;
+}
+
+.update-button {
+    min-height: 40px;
+    width: auto;
+    border-radius: 25px;
+    padding: 5px 25px;
+    font-size: 18px;
+    background-color: #A683E3;
+    color: white;
+    font-weight: bold;
+    box-shadow: 2px 2px 10px -3px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+
+input:checked+p {
+    text-decoration: line-through;
+    text-decoration-color: #A683E3;
+}
+
+input[type="checkbox"] {
+    margin: 0 15px 0 5px;
+    width: 18px;
+    height: 18px;
+    accent-color: #A683E3;
+    cursor: pointer;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    flex-grow: 1;
+}
+form {
+    text-align: center;
+}
+
+.add-task-form {
+    padding: 0 15px;
+}
+button.add-btn {
+    min-height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: none;
+    background-color: #A683E3;
+    font-size: 24px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(166, 131, 227, 0.4);
+    transition: all 0.2s ease;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+button.add-btn:hover {
+    background-color: #9670d5;
+    box-shadow: 0 5px 15px rgba(166, 131, 227, 0.6);
+    transform: translateX(-50%) translateY(-2px);
+}
+
+.edit-btn {
+    min-height: 30px;
+    width: auto;
+    border-radius: 20px;
+    padding: 6px 15px;
+    font-size: 14px;
+    background-color: #A683E3;
+    color: white;
+    font-weight: 500;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.edit-btn:hover {
+    background-color: #9670d5;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+input[type="text"] {
+    height: 45px;
+    text-align: left;
+    padding: 0 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #A683E3;
+    box-shadow: 0 0 0 2px rgba(166, 131, 227, 0.2);
+}
+
+::placeholder {
+    color: grey;
+    opacity: 1;
+}
+
+.alert {
+    background-color: #ff6b6b;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: 500;
+    display: none;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeIn 0.3s ease;
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.4);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+footer {
+    color: white;
+    color: rgba(0,0,0,0.5);
+    text-align: center;
+}
