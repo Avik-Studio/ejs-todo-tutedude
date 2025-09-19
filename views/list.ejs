@@ -1,73 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>My Todo List</title>
+    <title>Todo list</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <div class="main-box">
+    <div class="box">
         <h1>Todo List</h1>
-
-        <form action="/" method="GET" id="filterForm">
-            <label for="priority">Filter:</label>
-            <select name="priority" id="priority" onchange="document.getElementById('filterForm').submit()">
-                <option value="all" <%= currentPriority === "all" ? "selected" : "" %>>All</option>
+        <form action="/" method="GET" class="filter-form" id="filterForm">
+            <label for="priority-filter">Filter by Priority:</label>
+            <select id="priority-filter" name="priority" onchange="document.getElementById('filterForm').submit()">
+                <option value="all" <%= currentPriority === "all" ? "selected" : "" %>>All Tasks</option>
                 <option value="high" <%= currentPriority === "high" ? "selected" : "" %>>High</option>
                 <option value="medium" <%= currentPriority === "medium" ? "selected" : "" %>>Medium</option>
                 <option value="low" <%= currentPriority === "low" ? "selected" : "" %>>Low</option>
             </select>
         </form>
     </div>
-
-    <div class="task-section">
-        <!-- Task Items -->
-        <% if(items && items.length > 0) { %>
-            <% for(let k=0; k<items.length; k++){ %>
-                <% let index = indices[k]; %>
-                <div class="task-row <%= items[k].priority %>">
-                    <input type="checkbox" />
-                    <div class="task-text">
-                        <span><%= items[k].text %></span>
-                        <small class="badge <%= items[k].priority %>"><%= items[k].priority %></small>
+    <div class="box">
+        <div class="items">
+            <% if(items && items.length > 0){ %>
+                <% for(var j=0; j<items.length; j++){ %>
+                    <% var i = indices[j]; %>
+                    <div class="task-item <%= items[j].priority %>-priority">
+                        <input type="checkbox">
+                        <div class="task-content">
+                            <p><%= items[j].text %></p>
+                            <span class="priority-badge <%= items[j].priority %>"><%= items[j].priority %></span>
+                        </div>
+                        <div class="task-controls">
+                            <form action="/edit/<%= i %>" method="GET" class="edit-form">
+                                <button type="submit" class="edit-btn">Edit</button>
+                            </form>
+                            <form action="/delete/<%= i %>" method="POST" class="delete-form">
+                                <button type="submit" class="delete-btn">Delete</button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="buttons">
-                        <form action="/edit/<%= index %>" method="GET" class="inline">
-                            <button>Edit</button>
-                        </form>
-                        <form action="/delete/<%= index %>" method="POST" class="inline">
-                            <button>Delete</button>
-                        </form>
-                    </div>
-                </div>
+                <% } %>
+            <% } else { %>
+                <p>No tasks yet. Add something!</p>
             <% } %>
-        <% } else { %>
-            <p>No tasks found. Add some!</p>
-        <% } %>
-    </div>
+        </div>
+        <form action="/" method="post" class="add-task-form" id="taskForm" onsubmit="return validateForm()">
+            <div class="input-container">
+                <input type="text" name="ele1" id="taskInput" placeholder="Enter your task">
+                <select name="priority">
+                    <option value="high">High</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+            <button type="submit" value="Add" class="add-btn">+</button>
+        </form>
+        
+        <div id="alert" class="alert" style="display:none;">Please enter a task!</div>
+        
+        <script>
+            function validateForm() {
+                const taskInput = document.getElementById("taskInput");
+                const alert = document.getElementById("alert");
 
-    <form action="/" method="POST" id="addTaskForm" onsubmit="return checkTask()">
-        <input type="text" name="ele1" id="taskField" placeholder="Enter a task here..." />
-        <select name="priority">
-            <option value="high">High</option>
-            <option value="medium" selected>Medium</option>
-            <option value="low">Low</option>
-        </select>
-        <button type="submit">Add</button>
-    </form>
-
-    <div id="msg" style="display:none; color:red;">Task cannot be empty!</div>
-
-    <script>
-        function checkTask(){
-            const input = document.getElementById("taskField");
-            const message = document.getElementById("msg");
-            if(!input.value.trim()){
-                message.style.display = "block";
-                setTimeout(()=> message.style.display="none", 2500);
-                return false;
+                if (taskInput.value.trim() === "") {
+                    alert.style.display = "block";
+                    setTimeout(function() {
+                        alert.style.display = "none";
+                    }, 2500);
+                    return false;
+                }
+                return true;
             }
-            return true;
-        }
-    </script>
+        </script>
+    </div>
 </body>
 </html>
