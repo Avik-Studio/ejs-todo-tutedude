@@ -6,20 +6,20 @@
 </head>
 <body>
     <div class="box">
-        <h1>Todo List</h1>
-        <form action="/" method="GET" class="filter-form" id="filterForm">
-            <label for="priority-filter">Filter by Priority:</label>
-            <select id="priority-filter" name="priority" onchange="document.getElementById('filterForm').submit()">
-                <option value="all" <%= currentPriority === "all" ? "selected" : "" %>>All Tasks</option>
-                <option value="high" <%= currentPriority === "high" ? "selected" : "" %>>High</option>
-                <option value="medium" <%= currentPriority === "medium" ? "selected" : "" %>>Medium</option>
-                <option value="low" <%= currentPriority === "low" ? "selected" : "" %>>Low</option>
+        <h1>Todo list</h1>
+        <form action="/" method="GET" class="filter-form" id="filter-form">
+            <label for="priority-filter">Filter ny Priority</label>
+            <select name="priority" id="priority-filter" onchange="document.getElementById('filterFrom').submit()">
+                <option value="all" <%= currentPriority==="all" ? "selected" : "" %>>All Task</option>
+                <option value="high" <%= currentPriority==="high" ? "selected" : "" %>>High</option>
+                <option value="medium" <%= currentPriority==="medium" ? "selected" : "" %>>Medium</option>
+                <option value="low" <%= currentPriority==="low" ? "selected" : "" %>>Low</option>
             </select>
         </form>
     </div>
     <div class="box">
         <div class="items">
-            <% if(items && items.length > 0){ %>
+             <% if(items && items.length > 0){ %>
                 <% for(var j=0; j<items.length; j++){ %>
                     <% var i = indices[j]; %>
                     <div class="task-item <%= items[j].priority %>-priority">
@@ -42,7 +42,7 @@
                 <p>No tasks yet. Add something!</p>
             <% } %>
         </div>
-        <form action="/" method="post" class="add-task-form" id="taskForm" onsubmit="return validateForm()">
+                <form action="/" method="post" class="add-task-form" id="taskForm" onsubmit="return validateForm()">
             <div class="input-container">
                 <input type="text" name="ele1" id="taskInput" placeholder="Enter your task">
                 <select name="priority">
@@ -59,13 +59,9 @@
         <script>
             function validateForm() {
                 const taskInput = document.getElementById("taskInput");
-                const alert = document.getElementById("alert");
 
                 if (taskInput.value.trim() === "") {
-                    alert.style.display = "block";
-                    setTimeout(function() {
-                        alert.style.display = "none";
-                    }, 2500);
+                    alert("please enter a task!!!!!");
                     return false;
                 }
                 return true;
