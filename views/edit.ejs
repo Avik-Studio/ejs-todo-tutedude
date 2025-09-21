@@ -26,15 +26,8 @@
         <script>
             function validateEditForm() {
                 const editInput = document.getElementById("editInput");
-                const editAlert = document.getElementById("editAlert");
-                
                 if (editInput.value.trim() === "") {
-                    editAlert.style.display = "block";
-                    
-                    setTimeout(function() {
-                        editAlert.style.display = "none";
-                    }, 3000);
-                    
+                    alert("Please enter a task!!!");
                     return false;
                 }
                 return true;
